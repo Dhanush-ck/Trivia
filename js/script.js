@@ -53,4 +53,42 @@ const questions = [
             { text: "Programming Translators", correct: false},
         ] 
     }
-]
+];
+
+const questionElement = document.getElementById("question");
+const answerButtons = document.getElementById("answer-area");
+const nextButton = document.getElementById("next-btn");
+
+let index = 0;
+let score = 0;
+
+function start() {
+    index = 0;
+    score = 0;
+    nextButton.innerHTML = "Next";
+    show();
+}
+
+function show() {
+    reset();
+
+    let currentQuestion = questions[index];
+    let questionNumber = index + 1;
+    questionElement.innerHTML = questionNumber + "." + currentQuestion.question;
+
+    currentQuestion.answers.forEach(answer => {
+        const button = document.createElement("button");
+        button.innerHTML = answer.text;
+        button.classList.add("btn");
+        answerButtons.appendChild(button);
+    });
+}
+
+function reset() {
+    nextButton.style.display = "none";
+    while(answerButtons.firstChild) {
+        answerButtons.removeChild(answerButtons.firstChild);
+    }
+}
+
+start();
