@@ -31,10 +31,6 @@ body {
     padding: 10px 0 10px 0 ;
 }
 
-/* .container .question-area {
-
-} */
-
 .btn {
     width: 100%;
     background-color: #ffffff;
@@ -46,9 +42,13 @@ body {
     transition: all 0.3s;
 }
 
-.btn:hover {
+.btn:hover:not([disabled]) {
     background-color: #222;
     color: #ffffff;
+}
+
+.btn:disabled {
+    cursor: auto;
 }
 
 #next-btn {
@@ -67,4 +67,14 @@ body {
     align-items: center;
     cursor: pointer;
     display: none;
+}
+
+.correct {
+    background-color: #9aeabc;
+    color: #000000;
+}
+
+.incorrect {
+    background: #ff9393;
+    color: #000000;
 }
