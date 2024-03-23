@@ -59,13 +59,19 @@ const questionElement = document.getElementById("question");
 const answerButtons = document.getElementById("answer-area");
 const nextButton = document.getElementById("next-btn");
 
-let index = 0;
+let index;
+const count = [];
 let score = 0;
+let questionNumber;
 
 function start() {
-    index = 0;
+    setIndex();
     score = 0;
-    nextButton.innerHTML = "Next";
+    questionNumber = 1;
+    // for (let i=0; i<questions.length;i++) {
+    //     count.push(0);
+    // }
+    // nextButton.innerHTML = "Next";
     show();
 }
 
@@ -73,7 +79,6 @@ function show() {
     reset();
 
     let currentQuestion = questions[index];
-    let questionNumber = index + 1;
     questionElement.innerHTML = questionNumber + "." + currentQuestion.question;
 
     currentQuestion.answers.forEach(answer => {
@@ -116,30 +121,69 @@ function selectAnswer(e) {
 
 function showScore() {
     reset();
+    questionNumber++;
     questionElement.innerHTML = `You scored ${score} out of ${questions.length} !`;
     nextButton.innerHTML = "Play Again";
     nextButton.style.display = "flex";
 }
 
 function handleNextButton() {
-    index++;
-    if(index === questions.length-1) {
+    questionNumber++;
+    setIndex();
+    if(questionNumber === questions.length) {
         nextButton.innerHTML = "Show Result";
+        // questionNumber++;
     }
-    if(index<questions.length) {
+    if(questionNumber <= questions.length) {
         show();
+        console.log("There");
+        console.log(questionNumber);
     }
     else {
         showScore();
+        console.log("Here");
+        console.log(questionNumber);
+        console.log(questions.length);
     }
 }
 
 nextButton.addEventListener("click", () => {
-    if(index<questions.length) {
+    if(questionNumber<questions.length) {
+        // questionNumber++;
         handleNextButton();
     }
     else {
         start();
     }
 });
+
+function setRandomIndex() {
+    index = Math.floor(Math.random()*(questions.length));
+}
+
+function check() {
+    return count.includes(index);
+    // if(count.includes(index)) {
+    //     setRandomIndex();
+    // }
+    // else {
+    //     count.push(index);
+    // }
+}
+
+function setIndex() {
+    do {
+        setRandomIndex();
+    }while(check());
+    count.push(index);
+    // if(index) {
+    //     setRandomIndex();
+    //     check();
+    // }
+    // else {
+    //     index = Math.floor(Math.random()*(questions.length));
+    //     count.push(index);
+    // }
+    // index = 1;
+}
 start();
