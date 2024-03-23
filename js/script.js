@@ -71,7 +71,7 @@ function start() {
     // for (let i=0; i<questions.length;i++) {
     //     count.push(0);
     // }
-    // nextButton.innerHTML = "Next";
+    nextButton.innerHTML = "Next";
     show();
 }
 
@@ -121,7 +121,7 @@ function selectAnswer(e) {
 
 function showScore() {
     reset();
-    questionNumber++;
+    // questionNumber++;
     questionElement.innerHTML = `You scored ${score} out of ${questions.length} !`;
     nextButton.innerHTML = "Play Again";
     nextButton.style.display = "flex";
@@ -130,10 +130,6 @@ function showScore() {
 function handleNextButton() {
     questionNumber++;
     setIndex();
-    if(questionNumber === questions.length) {
-        nextButton.innerHTML = "Show Result";
-        // questionNumber++;
-    }
     if(questionNumber <= questions.length) {
         show();
         console.log("There");
@@ -143,12 +139,16 @@ function handleNextButton() {
         showScore();
         console.log("Here");
         console.log(questionNumber);
-        console.log(questions.length);
+        // console.log(questions.length);
+    }
+    if(questionNumber === questions.length) {
+        nextButton.innerHTML = "Show Result";
     }
 }
 
 nextButton.addEventListener("click", () => {
-    if(questionNumber<questions.length) {
+    console.log(questionNumber);
+    if(questionNumber <= questions.length) {
         // questionNumber++;
         handleNextButton();
     }
@@ -163,12 +163,6 @@ function setRandomIndex() {
 
 function check() {
     return count.includes(index);
-    // if(count.includes(index)) {
-    //     setRandomIndex();
-    // }
-    // else {
-    //     count.push(index);
-    // }
 }
 
 function setIndex() {
@@ -176,14 +170,6 @@ function setIndex() {
         setRandomIndex();
     }while(check());
     count.push(index);
-    // if(index) {
-    //     setRandomIndex();
-    //     check();
-    // }
-    // else {
-    //     index = Math.floor(Math.random()*(questions.length));
-    //     count.push(index);
-    // }
-    // index = 1;
 }
+
 start();
