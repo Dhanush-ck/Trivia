@@ -60,7 +60,7 @@ const answerButtons = document.getElementById("answer-area");
 const nextButton = document.getElementById("next-btn");
 
 let index;
-const count = [];
+let count = [];
 let score = 0;
 let questionNumber;
 
@@ -129,17 +129,14 @@ function showScore() {
 
 function handleNextButton() {
     questionNumber++;
-    setIndex();
     if(questionNumber <= questions.length) {
+        setIndex();
         show();
-        console.log("There");
         console.log(questionNumber);
     }
     else {
+        count = [];
         showScore();
-        console.log("Here");
-        console.log(questionNumber);
-        // console.log(questions.length);
     }
     if(questionNumber === questions.length) {
         nextButton.innerHTML = "Show Result";
@@ -147,7 +144,6 @@ function handleNextButton() {
 }
 
 nextButton.addEventListener("click", () => {
-    console.log(questionNumber);
     if(questionNumber <= questions.length) {
         // questionNumber++;
         handleNextButton();
